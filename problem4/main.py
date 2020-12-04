@@ -65,15 +65,15 @@ def solve_part_two():
         height_key = passport["hgt"][len(passport["hgt"])-2:]
         height_value = passport["hgt"][:len(passport["hgt"])-2:]
 
-        valid = validate_min_max(passport["byr"], validation_rules["byr"]) \
-            and validate_min_max(passport["iyr"], validation_rules["iyr"]) \
-            and validate_min_max(passport["eyr"], validation_rules["eyr"]) \
-            and height_key in validation_rules["hgt"] \
-            and validate_min_max(height_value, validation_rules["hgt"][height_key]) \
+        valid = validate_min_max(passport["byr"], VALIDATION_RULES["byr"]) \
+            and validate_min_max(passport["iyr"], VALIDATION_RULES["iyr"]) \
+            and validate_min_max(passport["eyr"], VALIDATION_RULES["eyr"]) \
+            and height_key in VALIDATION_RULES["hgt"] \
+            and validate_min_max(height_value, VALIDATION_RULES["hgt"][height_key]) \
             and validate_ecl(passport["ecl"]) \
             and validate_hex(passport["hcl"]) \
             and validate_pid(passport["pid"]) \
-            and height_key in validation_rules["hgt"] \
+            and height_key in VALIDATION_RULES["hgt"] \
 
 
         if valid:
@@ -93,7 +93,7 @@ def validate_pid(pid):
     return True
 
 def validate_ecl(color):
-    return color in validation_rules["ecl"]["valid_values"]
+    return color in VALIDATION_RULES["ecl"]["valid_values"]
 
 def validate_hex(value):
     if value[0] != "#":
@@ -117,7 +117,7 @@ def validate_min_max(value, validation_rule):
 
     return value >= validation_rule["min"] and value <= validation_rule["max"]
 
-validation_rules = {
+VALIDATION_RULES = {
     "byr": {
         "min": 1920,
         "max": 2002
