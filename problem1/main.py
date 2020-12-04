@@ -28,3 +28,56 @@ assert sum(matches) == match_target
 # Display final mul answer.
 final_mul_val = matches[0] * matches[1]
 print(final_mul_val)
+
+
+### Solution to part 2
+
+"""
+General approach: Sort list. Start with largest and smallest values.
+If sum greater than
+"""
+
+sample_input.sort()
+sorted_input = sample_input
+print(sorted_input)
+
+
+def find_three_sum(match_target, sorted_input):
+
+    if len(sorted_input) <= 2:
+        return None
+
+    l_index = 0
+    r_index = len(sorted_input) - 1
+    mapping_set = set(sample_input)
+    total = sorted_input[l_index] + sorted_input[r_index]
+    while l_index < r_index and len(sorted_input) > 0:
+        total = sorted_input[l_index] + sorted_input[r_index]
+
+        # print(len(sorted_input))
+        if total > match_target:
+            # Too big.
+            print("Too big")
+            r_index -= 1
+        else:
+            # Check to see if we have a match.
+            third_value = match_target - sorted_input[l_index] - sorted_input[r_index]
+            if third_value in mapping_set:
+                return sorted_input[l_index], sorted_input[r_index], third_value
+            middle_index = r_index - int((r_index - l_index)/2)
+            print(f"{middle_index}:{third_value}:{sorted_input[middle_index]}")
+            if sorted_input[middle_index] < third_value:
+                print("Incrementing L")
+                l_index += 1
+            else:
+                print("Decrementing R")
+                r_index -=1
+
+
+
+    return None
+
+
+print(find_three_sum(match_target, sorted_input))
+
+
